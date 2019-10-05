@@ -2,8 +2,8 @@ CC	= /opt/gbdk/bin/lcc -Wa-l -Wl-m -Wl-j
 
 BINS	= LD45.gb
 BONUS =
-SOURCE =  src/main.o src/box_collision.o src/game_screen.o
-ASSETS = data/sprites/font.o
+SOURCE =  src/main.o src/elem_pair.o src/game_screen.o
+ASSETS = data/sprites/font.o data/sprites/elem.o
 LVLS =
 
 all:	  $(LVLS) $(SOURCE) $(ASSETS) $(BONUS) $(BINS)
@@ -19,12 +19,11 @@ levels/%.o:	levels/%.c
 %.o:	%.c
 	$(CC) -c -o $@ $<
 
-data/sprites/*.o: data/sprites/*.c
-	$(CC) -Wa-l -Wf-bo5 -c -o $@ $<
-
-src/game_screen.o: src/game_screen.c
-	$(CC) -Wa-l -Wf-bo7 -c -o $@ $<
-
+data/sprites/elem.o: data/sprites/elem.c
+	$(CC) -Wa-l -Wf-bo6 -c -o $@ $<
+	
+data/sprites/font.o: data/sprites/font.c
+		$(CC) -Wa-l -Wf-bo5 -c -o $@ $<
 
 src/credits.o: src/credits.c
 	$(CC) -Wa-l -Wf-bo7 -c -o $@ $<
@@ -37,6 +36,7 @@ src/title_screen.o: src/title_screen.c
 
 data/staffroll.o: data/staffroll.s
 	$(CC) -Wa-l -Wf-bo8 -c -o data/staffroll.o data/staffroll_merge.s
+
 data/kwakwa_logo.o:
 	$(CC) -Wa-l -Wf-bo3 -c -o data/kwakwa_logo.o data/kwakwa_logo.s
 
@@ -90,4 +90,4 @@ data/whale_poster.o: data/whale_poster.s
 #	./tools/mod2gbt/mod2gbt data/template.mod song -c 2
 
 clean:
-	rm -f *.o */*.o */*/*.o *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm
+	rm -f *.o */*.o */*/*.o *.lst */*.lst */*/*.lst *.map */*.map */*/*.map *.gb *~ */*~ */*/*~ *.rel */*.rel */*/*.rel *.cdb */*.cdb */*/*.cdb *.ihx *.lnk *.sym *.asm

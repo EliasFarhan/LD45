@@ -2,7 +2,6 @@
 #include "game_screen.h"
 #include "../data/sprites/font.h"
 
-
 UBYTE gameBoolVariables;
 UBYTE keys;
 
@@ -12,6 +11,7 @@ UBYTE text_pos_x;
 UBYTE text_pos_y;
 UBYTE sprite_index;
 
+
 #define FINISH_INDEX 0u
 #define FINISH_BOOL (1u & gameBoolVariables)
 
@@ -19,20 +19,22 @@ UBYTE sprite_index;
 void set_text_sprites() NONBANKED
 {
   UBYTE index;
-  UBYTE letter;
 
+  index = 0u;
   SWITCH_ROM_MBC1(FontLettersBank);
-  for(index = 0u; index != 11u; ++index)
+  while(text[index] != 0)
   {
     if(text[index] == ' ')
     {
-      continue;
+      goto loop_end;
     }
     set_sprite_prop(sprite_index,0x00U);
 
     set_sprite_tile(sprite_index, text[index]-origin);
     move_sprite(sprite_index, text_pos_x + (index << 3u), text_pos_y);
     sprite_index++;
+    loop_end:
+    index++;
   }
 }
 
