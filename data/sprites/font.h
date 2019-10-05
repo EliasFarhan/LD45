@@ -24,7 +24,7 @@
 
 
 /* Bank of tiles. */
-#define FontLettersBank 0
+#define FontLettersBank 5
 /* Start of tile array. */
 extern unsigned char FontLetters[];
 

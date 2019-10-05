@@ -1,10 +1,10 @@
 #include <gb/gb.h>
+#include "game_screen.h"
 
-int main(void)
+void main()
 {
   while(1)
   {
-
+    game_screen();
   }
-  return 0;
 }

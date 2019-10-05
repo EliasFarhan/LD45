@@ -1,8 +1,8 @@
 CC	= /opt/gbdk/bin/lcc -Wa-l -Wl-m -Wl-j
 
 BINS	= LD45.gb
-BONUS =  
-SOURCE =  src/main.o
+BONUS =
+SOURCE =  src/main.o src/box_collision.o src/game_screen.o
 ASSETS = data/sprites/font.o
 LVLS =
 
@@ -18,6 +18,9 @@ levels/%.o:	levels/%.c
 
 %.o:	%.c
 	$(CC) -c -o $@ $<
+
+data/sprites/*.o: data/sprites/*.c
+	$(CC) -Wa-l -Wf-bo5 -c -o $@ $<
 
 src/game_screen.o: src/game_screen.c
 	$(CC) -Wa-l -Wf-bo7 -c -o $@ $<
